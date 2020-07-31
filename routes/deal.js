@@ -19,9 +19,10 @@ const multer = require("multer");
 // var uploadDisk = multer({ storage: storage });
 
 
+
 router.post('/create/:id?',authenticateJWT,async(req,res)=>{
      var id=req.params.id;
-     var {name,type,amount,ccy1,ccy2,time} =req.body
+     var {name,type,amount,ccy1,ccy2,time,rate_type} =req.body
      var {user_id}=req.user;
      var update_date={
          userId:user_id,
@@ -30,7 +31,8 @@ router.post('/create/:id?',authenticateJWT,async(req,res)=>{
          amount:amount,
          ccy1:ccy1,
          ccy2:ccy2,
-         time:time
+         time:time,
+         rate_type:rate_type
      }
 
      var update_result;

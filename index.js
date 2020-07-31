@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 var server = require('http').createServer(app);
+const io = require("socket.io").listen(server);
 const jwt = require('jsonwebtoken');
 const models = require('./Models');
 const { Op } = require("sequelize");
@@ -73,4 +74,15 @@ app.use('/deal',Deal)
 app.use('/error', (req, res, next) => {
     res.send("connection not authenticated")
 })
+
+//chat functionality
+
+io.on("connection", socket => {
+    console.log("a user connected :D");
+    socket.on("chat message", msg => {
+      console.log(msg);
+      io.emit("chat message", msg);
+    });
+  });
+
 server.listen(52000, () => console.log("server is listening at port 52000"))
