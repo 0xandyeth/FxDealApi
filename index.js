@@ -19,7 +19,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 //import Routes
 const User = require('./routes/user');
 const Deal = require('./routes/deal');
-
+require('dotenv').config()
 
 
 
